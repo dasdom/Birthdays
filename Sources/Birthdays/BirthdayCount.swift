@@ -10,33 +10,13 @@ public struct BirthdayCount {
   
   public init(birthday: Birthday) {
     
-    let today = Date()
-    let birthdayComponents = Calendar.current.dateComponents([.day, .month, .year], from: birthday.date)
-    let currentDateComponents = Calendar.current.dateComponents([.day, .month, .year], from: today)
+    // https://stackoverflow.com/a/31132581/498796
+    let calendar = Calendar(identifier: .gregorian)
+    let today = calendar.startOfDay(for: Date())
+    let birthdayComponents = calendar.dateComponents([.day, .month], from: birthday.date)
+    let nextBirthday = calendar.nextDate(after: today, matching: birthdayComponents, matchingPolicy: .nextTimePreservingSmallerComponents)
     
-    guard let birthdayDay = birthdayComponents.day, let birthdayMonth = birthdayComponents.month,
-      let currentDay = currentDateComponents.day, let currentMonth = currentDateComponents.month,
-      let currentYear = currentDateComponents.year else {
-        fatalError()
-    }
-    let transformedYear: Int?
-    if birthdayMonth > currentMonth {
-      transformedYear = currentYear
-    } else if birthdayMonth == currentMonth, birthdayDay >= currentDay {
-      transformedYear = currentYear
-    } else {
-      transformedYear = currentYear + 1
-    }
-
-    var dateComponents = DateComponents()
-    dateComponents.day = birthdayDay
-    dateComponents.month = birthdayMonth
-    dateComponents.year = transformedYear
-    guard let date = Calendar.current.date(from: dateComponents) else {
-      fatalError()
-    }
-    
-    guard let daysCount = Calendar.current.dateComponents([.day], from: today, to: date).day else {
+    guard let daysCount = calendar.dateComponents([.day], from: today, to: nextBirthday!).day else {
       fatalError()
     }
     
