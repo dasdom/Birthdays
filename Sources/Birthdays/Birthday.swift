@@ -5,6 +5,11 @@
 import Foundation
 
 public struct Birthday {
-  public let name: String
-  public let date: Date
+  let name: String
+  let date: Date
+  
+  public init(name: String, date: Date) {
+    self.name = name
+    self.date = date
+  }
 }
