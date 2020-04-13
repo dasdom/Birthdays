@@ -5,20 +5,27 @@
 import Foundation
 
 public class BirthdaysManager {
-  public private(set) var all: [Birthday]
+  public private(set) var all: [Birthday] {
+    didSet {
+      birthdayCounts = all
+        .map { BirthdayCount(birthday: $0) }
+        .sorted(by: { $0.remainingDays < $1.remainingDays })
+    }
+  }
+  public private(set) var birthdayCounts: [BirthdayCount]
   
   public init() {
     all = []
     all = loadBirthdays()
+    
+    birthdayCounts = all
+    .map { BirthdayCount(birthday: $0) }
+    .sorted(by: { $0.remainingDays < $1.remainingDays })
   }
   
   public func add(_ birthday: Birthday) {
     all.append(birthday)
     save(birthdays: all)
-  }
-  
-  public func birthdayCounts() -> [BirthdayCount] {
-    all.map { BirthdayCount(birthday: $0) }.sorted(by: { $0.remainingDays < $1.remainingDays })
   }
 }
 
