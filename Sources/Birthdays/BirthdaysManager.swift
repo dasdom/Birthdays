@@ -16,11 +16,13 @@ public class BirthdaysManager {
   
   public init() {
     all = []
+    birthdayCounts = []
+    
     all = loadBirthdays()
     
     birthdayCounts = all
-    .map { BirthdayCount(birthday: $0) }
-    .sorted(by: { $0.remainingDays < $1.remainingDays })
+      .map { BirthdayCount(birthday: $0) }
+      .sorted(by: { $0.remainingDays < $1.remainingDays })
   }
   
   public func add(_ birthday: Birthday) {
