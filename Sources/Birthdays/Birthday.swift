@@ -14,23 +14,3 @@ public struct Birthday : Codable {
   }
 }
 
-public extension Birthday {
-  public static func save(birthdays: [Birthday]) {
-    do {
-      let data = try JSONEncoder().encode(birthdays)
-      data.write(to: FileManager.default.birthdaysURL(), options: .atomic)
-    } catch {
-      print("error: \(error)")
-    }
-  }
-  
-  public static func loadBirthdays() -> [Birthdays] {
-    do {
-      let data = Data(contentsOf: FileManager.default.birthdaysURL())
-      return JSONDecoder().decode([Birthday].self, from: data)
-    } catch {
-      return []
-    }
-  }
-}
-
