@@ -13,6 +13,9 @@ public class BirthdaysManager {
     }
   }
   public private(set) var birthdayCounts: [BirthdayCount]
+  public private(set) var count: [Int] {
+    birthdayCounts.count
+  }
   
   public init() {
     all = []
@@ -28,6 +31,10 @@ public class BirthdaysManager {
   public func add(_ birthday: Birthday) {
     all.append(birthday)
     save(birthdays: all)
+  }
+  
+  public func birthdayCount(for index: Int) -> BirthdayCount {
+    birthdayCounts[index]
   }
 }
 
