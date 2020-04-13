@@ -5,11 +5,14 @@
 import Foundation
 
 public class BirthdaysManager {
-  public private(set) lazy var all: [Birthday] = {
-    loadBirthdays()
-  }()
+  public private(set) var all: [Birthday]
   
-  func add(_ birthday: Birthday) {
+  public init() {
+    all = []
+    all = loadBirthdays()
+  }
+  
+  public func add(_ birthday: Birthday) {
     all.append(birthday)
     save(birthdays: all)
   }
