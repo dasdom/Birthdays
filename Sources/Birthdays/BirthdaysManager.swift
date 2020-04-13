@@ -13,7 +13,7 @@ public class BirthdaysManager {
     }
   }
   public private(set) var birthdayCounts: [BirthdayCount]
-  public private(set) var count: [Int] {
+  public var count: Int {
     birthdayCounts.count
   }
   
