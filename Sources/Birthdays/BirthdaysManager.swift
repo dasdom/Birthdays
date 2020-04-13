@@ -16,6 +16,10 @@ public class BirthdaysManager {
     all.append(birthday)
     save(birthdays: all)
   }
+  
+  public func birthdayCounts() -> [BirthdayCount] {
+    all.map { BirthdayCount(birthday: $0) }.sorted(by: { $0.remainingDays < $1.remainingDays })
+  }
 }
 
 public extension BirthdaysManager {
