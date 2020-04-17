@@ -12,7 +12,7 @@ public class BirthdaysManager {
         .sorted(by: { $0.remainingDays < $1.remainingDays })
     }
   }
-  public private(set) var birthdayCounts: [BirthdayCount]
+  @Published public private(set) var birthdayCounts: [BirthdayCount]
   public var count: Int {
     birthdayCounts.count
   }
