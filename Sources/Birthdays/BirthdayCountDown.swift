@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct BirthdayCount {
+public struct BirthdayCountDown {
   public let name: String
   public let remainingDays: Int
   
