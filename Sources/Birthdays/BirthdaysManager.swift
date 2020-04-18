@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class BirthdaysManager {
+public class BirthdaysManager : ObservableObject {
   public private(set) var all: [Birthday] {
     didSet {
       birthdayCounts = all
