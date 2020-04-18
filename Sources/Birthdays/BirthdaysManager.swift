@@ -5,7 +5,7 @@
 import Foundation
 
 public class BirthdaysManager : ObservableObject {
-  public private(set) var all: [Birthday] {
+  public var all: [Birthday] {
     didSet {
       birthdayCounts = all
         .map { BirthdayCountdown(birthday: $0) }
