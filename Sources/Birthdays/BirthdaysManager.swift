@@ -8,11 +8,11 @@ public class BirthdaysManager {
   public private(set) var all: [Birthday] {
     didSet {
       birthdayCounts = all
-        .map { BirthdayCountDown(birthday: $0) }
+        .map { BirthdayCountdown(birthday: $0) }
         .sorted(by: { $0.remainingDays < $1.remainingDays })
     }
   }
-  @Published public private(set) var birthdayCounts: [BirthdayCountDown]
+  @Published public private(set) var birthdayCounts: [BirthdayCountdown]
   
   public init() {
     all = []
@@ -21,7 +21,7 @@ public class BirthdaysManager {
     all = loadBirthdays()
     
     birthdayCounts = all
-      .map { BirthdayCountDown(birthday: $0) }
+      .map { BirthdayCountdown(birthday: $0) }
       .sorted(by: { $0.remainingDays < $1.remainingDays })
   }
   
