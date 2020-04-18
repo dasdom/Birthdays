@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct BirthdayCountdown {
+public struct BirthdayCountdown : Hashable {
   public let name: String
   public let remainingDays: Int
   
