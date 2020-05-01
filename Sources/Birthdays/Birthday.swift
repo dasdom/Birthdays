@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Birthday : Codable {
+public struct Birthday : Codable, Equatable {
   let name: String
   let date: Date
   

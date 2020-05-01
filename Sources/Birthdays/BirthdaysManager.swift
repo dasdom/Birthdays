@@ -29,6 +29,15 @@ public class BirthdaysManager : ObservableObject {
     all.append(birthday)
     save(birthdays: all)
   }
+  
+  public func remove(at index: UInt) {
+    if index < birthdayCounts.count {
+      let birthday = birthdayCounts[index]
+      if let allIndex = all.firstIndex(of: birthday) {
+        all.remove(at: allIndex)
+      }
+    }
+  }
 }
 
 public extension BirthdaysManager {
