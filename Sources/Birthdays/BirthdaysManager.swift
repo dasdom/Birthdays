@@ -30,9 +30,9 @@ public class BirthdaysManager : ObservableObject {
     save(birthdays: all)
   }
   
-  public func remove(at index: UInt) {
+  public func remove(at index: Int) {
     if index < birthdayCounts.count {
-      let birthday = birthdayCounts[index]
+      let birthday = birthdayCounts[index].birthday
       if let allIndex = all.firstIndex(of: birthday) {
         all.remove(at: allIndex)
       }
