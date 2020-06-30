@@ -5,22 +5,29 @@
 import Foundation
 
 public class BirthdaysManager : ObservableObject {
+  
+  let fileURL: URL
   public var all: [Birthday] {
     didSet {
-      birthdayCounts = all
+      birthdayCountdowns = all
         .map { BirthdayCountdown(birthday: $0) }
         .sorted(by: { $0.remainingDays < $1.remainingDays })
     }
   }
-  @Published public private(set) var birthdayCounts: [BirthdayCountdown]
+  @Published public private(set) var birthdayCountdowns: [BirthdayCountdown]
   
-  public init() {
+  public init(fileURL: URL? = nil) {
+    if let fileURL = fileURL {
+      self.fileURL = fileURL
+    } else {
+      self.fileURL = FileManager.default.birthdaysURL()
+    }
     all = []
-    birthdayCounts = []
+    birthdayCountdowns = []
     
     all = loadBirthdays()
     
-    birthdayCounts = all
+    birthdayCountdowns = all
       .map { BirthdayCountdown(birthday: $0) }
       .sorted(by: { $0.remainingDays < $1.remainingDays })
   }
@@ -31,8 +38,8 @@ public class BirthdaysManager : ObservableObject {
   }
   
   public func remove(at index: Int) {
-    if index < birthdayCounts.count {
-      let birthday = birthdayCounts[index].birthday
+    if index < birthdayCountdowns.count {
+      let birthday = birthdayCountdowns[index].birthday
       if let allIndex = all.firstIndex(of: birthday) {
         all.remove(at: allIndex)
       }
@@ -44,7 +51,7 @@ public extension BirthdaysManager {
   func save(birthdays: [Birthday]) {
     do {
       let data = try JSONEncoder().encode(birthdays)
-      try data.write(to: FileManager.default.birthdaysURL(), options: .atomic)
+      try data.write(to: fileURL, options: .atomic)
     } catch {
       print("error: \(error)")
     }
@@ -52,7 +59,7 @@ public extension BirthdaysManager {
   
   func loadBirthdays() -> [Birthday] {
     do {
-      let data = try Data(contentsOf: FileManager.default.birthdaysURL())
+      let data = try Data(contentsOf: fileURL)
       return try JSONDecoder().decode([Birthday].self, from: data)
     } catch {
       return []
