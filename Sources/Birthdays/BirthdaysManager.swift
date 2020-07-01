@@ -42,6 +42,7 @@ public class BirthdaysManager : ObservableObject {
       let birthday = birthdayCountdowns[index].birthday
       if let allIndex = all.firstIndex(of: birthday) {
         all.remove(at: allIndex)
+        save(birthdays: all)
       }
     }
   }
