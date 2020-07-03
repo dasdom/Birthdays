@@ -7,7 +7,7 @@ import Foundation
 public struct BirthdayCountdown : Hashable {
   public let name: String
   public let remainingDays: Int
-  let birthday: Birthday
+  public let birthday: Birthday
   
   public init(birthday: Birthday) {
     
