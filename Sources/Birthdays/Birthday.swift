@@ -6,7 +6,7 @@ import Foundation
 
 public struct Birthday : Codable, Equatable, Hashable {
   let name: String
-  let date: Date
+  public let date: Date
   
   public init(name: String, date: Date) {
     self.name = name
