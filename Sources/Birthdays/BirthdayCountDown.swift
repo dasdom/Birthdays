@@ -8,6 +8,7 @@ public struct BirthdayCountdown : Hashable {
   public let name: String
   public let remainingDays: Int
   public let birthday: Birthday
+  public let age: Int
   
   public init(birthday: Birthday) {
     
@@ -21,8 +22,13 @@ public struct BirthdayCountdown : Hashable {
       fatalError()
     }
     
+    guard let age = calendar.dateComponents([.year], from: birthday.date, to: today).year else {
+      fatalError()
+    }
+    
     name = birthday.name
     remainingDays = daysCount
     self.birthday = birthday
+    self.age = age
   }
 }
