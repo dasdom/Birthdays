@@ -10,6 +10,9 @@ public class BirthdaysManager : ObservableObject {
   public var all: [Birthday] {
     didSet {
       birthdayCountdowns = all
+        .filter({ birthday -> Bool in
+          return birthday.date.timeIntervalSince(Date()) > 0 || birthday.periodically
+        })
         .map { BirthdayCountdown(birthday: $0) }
         .sorted(by: { $0.remainingDays < $1.remainingDays })
     }
