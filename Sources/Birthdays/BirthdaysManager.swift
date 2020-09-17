@@ -31,6 +31,9 @@ public class BirthdaysManager : ObservableObject {
     all = loadBirthdays()
     
     birthdayCountdowns = all
+      .filter({ birthday -> Bool in
+        return birthday.date.timeIntervalSince(Date()) > 0 || birthday.periodically
+      })
       .map { BirthdayCountdown(birthday: $0) }
       .sorted(by: { $0.remainingDays < $1.remainingDays })
   }
@@ -54,7 +57,10 @@ public class BirthdaysManager : ObservableObject {
 public extension BirthdaysManager {
   func save(birthdays: [Birthday]) {
     do {
-      let data = try JSONEncoder().encode(birthdays)
+      let filteredBirthdays = birthdays.filter({ birthday -> Bool in
+        return birthday.date.timeIntervalSince(Date()) > 0 || birthday.periodically
+      })
+      let data = try JSONEncoder().encode(filteredBirthdays)
       try data.write(to: fileURL, options: .atomic)
     } catch {
       print("error: \(error)")
