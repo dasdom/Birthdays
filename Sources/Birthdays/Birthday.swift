@@ -7,7 +7,7 @@ import Foundation
 public struct Birthday : Codable, Equatable, Hashable {
   let name: String
   public let date: Date
-  let oneTime: Bool
+  public let oneTime: Bool
   
   public init(name: String, date: Date, oneTime: Bool = false) {
     self.name = name
