@@ -7,12 +7,12 @@ import Foundation
 public struct Birthday : Codable, Equatable, Hashable {
   let name: String
   public let date: Date
-  let periodically: Bool
+  let oneTime: Bool
   
-  public init(name: String, date: Date, periodically: Bool) {
+  public init(name: String, date: Date, oneTime: Bool = false) {
     self.name = name
     self.date = date
-    self.periodically = periodically
+    self.oneTime = oneTime
   }
 }
 
