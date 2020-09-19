@@ -11,7 +11,13 @@ public struct Birthday : Codable, Equatable, Hashable {
   
   public init(name: String, date: Date, oneTime: Bool = false) {
     self.name = name
-    self.date = date
+    
+    var dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
+    dateComponents.hour = 0
+    dateComponents.minute = 0
+    dateComponents.second = 0
+
+    self.date = Calendar.current.date(from: dateComponents) ?? date
     self.oneTime = oneTime
   }
 }
