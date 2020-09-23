@@ -20,5 +20,9 @@ public struct Birthday : Codable, Equatable, Hashable {
     self.date = Calendar.current.date(from: dateComponents) ?? date
     self.oneTime = oneTime
   }
+  
+  public func id() -> String {
+    return "\(name)-\(date.timeIntervalSince1970)"
+  }
 }
 
