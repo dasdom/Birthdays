@@ -29,7 +29,7 @@ public struct BirthdayCountdown : Hashable {
     }
     
     name = birthday.name
-    remainingDays = daysCount-1
+    remainingDays = daysCount
     self.birthday = birthday
     self.age = age
   }
