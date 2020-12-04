@@ -14,7 +14,8 @@ public struct BirthdayCountdown : Hashable {
     
     // https://stackoverflow.com/a/31132581/498796
     let calendar = Calendar(identifier: .gregorian)
-    let today = calendar.startOfDay(for: Date())
+    let date = Date(timeIntervalSinceNow: 24 * 60 * 60)
+    let today = calendar.startOfDay(for: date)
     let birthdayComponents = calendar.dateComponents([.day, .month], from: birthday.date)
     let nextBirthday = calendar.nextDate(after: today, matching: birthdayComponents, matchingPolicy: .nextTimePreservingSmallerComponents)
     
