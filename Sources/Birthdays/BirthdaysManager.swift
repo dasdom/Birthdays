@@ -32,7 +32,7 @@ public class BirthdaysManager : ObservableObject {
     
     birthdayCountdowns = all
       .filter({ birthday -> Bool in
-        return birthday.date.timeIntervalSince(Date()) > 0 || false == birthday.oneTime
+        return birthday.date.timeIntervalSince(Date()) >= 0 || false == birthday.oneTime
       })
       .map { BirthdayCountdown(birthday: $0) }
       .sorted(by: { $0.remainingDays < $1.remainingDays })
